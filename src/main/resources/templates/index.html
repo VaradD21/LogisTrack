@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>LogisTrack</title>
+    <style>
+        body { font-family: Arial; margin: 40px; }
+        input, select, button { margin: 5px; }
+        .zone { margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+<h2>LogisTrack – Parcel Intake</h2>
+
+<form action="/add" method="post">
+    <input name="id" placeholder="Parcel ID" required />
+    <input name="zone" placeholder="Zone" required />
+    <input name="weight" type="number" step="0.1" placeholder="Weight" required />
+
+    <select name="priority">
+        <option value="URGENT">URGENT</option>
+        <option value="EXPRESS">EXPRESS</option>
+        <option value="NORMAL">NORMAL</option>
+    </select>
+
+    <button type="submit">Add Parcel</button>
+</form>
+
+<form action="/sort" method="post">
+    <button type="submit">Sort Next Parcel</button>
+</form>
+
+<hr/>
+
+<h3>Dispatch Queues</h3>
+
+<div th:each="entry : ${queues}">
+    <div class="zone">
+        <strong>Zone:</strong> <span th:text="${entry.key}"></span><br/>
+        <strong>Queue size:</strong>
+        <span th:text="${entry.value.size()}"></span>
+    </div>
+</div>
+
+</body>
+</html>
