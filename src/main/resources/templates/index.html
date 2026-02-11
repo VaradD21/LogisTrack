@@ -1,46 +1,216 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>LogisTrack</title>
+    <title>LogisTrack - Logistics Management</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: Arial; margin: 40px; }
-        input, select, button { margin: 5px; }
-        .zone { margin-top: 20px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            color: #2d3748;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            color: #718096;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            color: #2d3748;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        input, select {
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        button {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        .button-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .queues-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .zone-card {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .zone-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            border-color: #667eea;
+        }
+
+        .zone-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+
+        .queue-size {
+            font-size: 24px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .queue-label {
+            font-size: 12px;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .form-group {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="container">
+        <header>
+            <h1>📦 LogisTrack</h1>
+            <p class="subtitle">Logistics Management System</p>
+        </header>
 
-<h2>LogisTrack – Parcel Intake</h2>
+        <div class="card">
+            <h2>Add New Parcel</h2>
+            <form action="/add" method="post">
+                <div class="form-group">
+                    <input name="id" placeholder="Parcel ID" required />
+                    <input name="zone" placeholder="Delivery Zone" required />
+                    <input name="weight" type="number" step="0.1" placeholder="Weight (kg)" required />
+                    <select name="priority">
+                        <option value="URGENT">🔴 URGENT</option>
+                        <option value="EXPRESS">🟠 EXPRESS</option>
+                        <option value="NORMAL" selected>🟢 NORMAL</option>
+                    </select>
+                </div>
+                <div class="actions">
+                    <button type="submit">Add Parcel</button>
+                </div>
+            </form>
+        </div>
 
-<form action="/add" method="post">
-    <input name="id" placeholder="Parcel ID" required />
-    <input name="zone" placeholder="Zone" required />
-    <input name="weight" type="number" step="0.1" placeholder="Weight" required />
+        <div class="card">
+            <h2>Sorting Operations</h2>
+            <form action="/sort" method="post">
+                <button type="submit" class="button-secondary">Sort Next Parcel</button>
+            </form>
+        </div>
 
-    <select name="priority">
-        <option value="URGENT">URGENT</option>
-        <option value="EXPRESS">EXPRESS</option>
-        <option value="NORMAL">NORMAL</option>
-    </select>
-
-    <button type="submit">Add Parcel</button>
-</form>
-
-<form action="/sort" method="post">
-    <button type="submit">Sort Next Parcel</button>
-</form>
-
-<hr/>
-
-<h3>Dispatch Queues</h3>
-
-<div th:each="entry : ${queues}">
-    <div class="zone">
-        <strong>Zone:</strong> <span th:text="${entry.key}"></span><br/>
-        <strong>Queue size:</strong>
-        <span th:text="${entry.value.size()}"></span>
+        <div class="card">
+            <h2>Dispatch Queues by Zone</h2>
+            <div class="queues-grid">
+                <div th:each="entry : ${queues}" class="zone-card">
+                    <div class="zone-name" th:text="${entry.key}">Zone A</div>
+                    <div class="queue-size" th:text="${entry.value.size()}">0</div>
+                    <div class="queue-label">Parcels in Queue</div>
+                </div>
+            </div>
+            <div th:if="${queues.isEmpty()}" style="text-align: center; color: #718096; padding: 40px;">
+                No parcels in dispatch queues yet
+            </div>
+        </div>
     </div>
-</div>
-
 </body>
 </html>
