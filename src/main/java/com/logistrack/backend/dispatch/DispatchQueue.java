@@ -2,6 +2,8 @@ package com.logistrack.backend.dispatch;
 
 import com.logistrack.domain.Parcel;
 import java.util.ArrayDeque;
+import java.util.Collections;
+import java.util.List;
 import java.util.Queue;
 
 public class DispatchQueue {
@@ -18,5 +20,9 @@ public class DispatchQueue {
 
     public int size() {
         return queue.size();
+    }
+
+    public List<Parcel> getAll() {
+        return Collections.unmodifiableList(List.copyOf(queue));
     }
 }

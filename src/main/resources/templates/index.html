@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>LogisTrack - Logistics Management</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,16 +20,22 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
+        /* ── HEADER ── */
         header {
             background: rgba(255, 255, 255, 0.95);
             padding: 25px 30px;
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         h1 {
@@ -43,12 +50,65 @@
             margin-top: 5px;
         }
 
+        .header-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 20px;
+        }
+
+        /* ── STATS BAR ── */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid #667eea;
+        }
+
+        .stat-card.orange {
+            border-left-color: #f093fb;
+        }
+
+        .stat-card.green {
+            border-left-color: #48bb78;
+        }
+
+        .stat-card.red {
+            border-left-color: #f5576c;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #2d3748;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #718096;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 6px;
+        }
+
+        /* ── CARDS ── */
         .card {
             background: rgba(255, 255, 255, 0.95);
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         h2 {
@@ -58,6 +118,7 @@
             margin-bottom: 20px;
         }
 
+        /* ── FORM ── */
         .form-group {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -65,7 +126,8 @@
             margin-bottom: 20px;
         }
 
-        input, select {
+        input,
+        select {
             padding: 12px 16px;
             border: 2px solid #e2e8f0;
             border-radius: 8px;
@@ -75,12 +137,14 @@
             background: white;
         }
 
-        input:focus, select:focus {
+        input:focus,
+        select:focus {
             outline: none;
             border-color: #667eea;
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         }
 
+        /* ── BUTTONS ── */
         button {
             padding: 12px 24px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -107,15 +171,103 @@
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         }
 
+        .button-green {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: #1a2e23;
+        }
+
+        .actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        /* ── PENDING PARCELS TABLE ── */
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        thead {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+        }
+
+        th {
+            text-align: left;
+            padding: 12px 16px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #718096;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 12px 16px;
+            border-top: 1px solid #f0f4f8;
+            color: #2d3748;
+        }
+
+        tr:hover td {
+            background: #f7faff;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-urgent {
+            background: #fff5f5;
+            color: #c53030;
+        }
+
+        .badge-express {
+            background: #fffaf0;
+            color: #c05621;
+        }
+
+        .badge-normal {
+            background: #f0fff4;
+            color: #276749;
+        }
+
+        .badge-received {
+            background: #ebf8ff;
+            color: #2b6cb0;
+        }
+
+        .badge-sorted {
+            background: #fffff0;
+            color: #975a16;
+        }
+
+        .badge-dispatched {
+            background: #f0fff4;
+            color: #276749;
+        }
+
+        /* ── DISPATCH ZONE GRID ── */
         .queues-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 15px;
             margin-top: 20px;
         }
 
         .zone-card {
-            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            background: linear-gradient(135deg, #667eea08 0%, #764ba215 100%);
             padding: 20px;
             border-radius: 10px;
             border: 2px solid #e2e8f0;
@@ -124,61 +276,118 @@
 
         .zone-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
             border-color: #667eea;
         }
 
-        .zone-name {
-            font-size: 18px;
-            font-weight: 600;
-            color: #2d3748;
-            margin-bottom: 8px;
+        .zone-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
         }
 
-        .queue-size {
-            font-size: 24px;
+        .zone-name {
+            font-size: 17px;
+            font-weight: 700;
+            color: #2d3748;
+        }
+
+        .zone-count {
+            font-size: 22px;
             font-weight: 700;
             color: #667eea;
         }
 
-        .queue-label {
-            font-size: 12px;
-            color: #718096;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .actions {
+        .zone-parcel-item {
             display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 7px 0;
+            border-top: 1px solid #e2e8f0;
+            font-size: 13px;
         }
 
+        .zone-parcel-id {
+            font-weight: 600;
+            color: #2d3748;
+        }
+
+        .zone-parcel-meta {
+            color: #718096;
+            font-size: 12px;
+        }
+
+        /* ── EMPTY STATE ── */
+        .empty {
+            text-align: center;
+            color: #a0aec0;
+            padding: 40px 20px;
+            font-size: 14px;
+        }
+
+        .empty-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        /* ── RESPONSIVE ── */
         @media (max-width: 768px) {
             .form-group {
                 grid-template-columns: 1fr;
             }
-            
+
             h1 {
-                font-size: 24px;
+                font-size: 22px;
+            }
+
+            .stat-value {
+                font-size: 26px;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="container">
+
+        <!-- HEADER -->
         <header>
-            <h1>📦 LogisTrack</h1>
-            <p class="subtitle">Logistics Management System</p>
+            <div>
+                <h1>📦 LogisTrack</h1>
+                <p class="subtitle">Logistics Management System</p>
+            </div>
+            <div class="header-badge">Hub H1</div>
         </header>
 
+        <!-- STATS BAR -->
+        <div class="stats-bar">
+            <div class="stat-card">
+                <div class="stat-value" th:text="${pendingCount}">0</div>
+                <div class="stat-label">Awaiting Sort</div>
+            </div>
+            <div class="stat-card green">
+                <div class="stat-value" th:text="${dispatchedCount}">0</div>
+                <div class="stat-label">In Dispatch Queue</div>
+            </div>
+            <div class="stat-card orange">
+                <div class="stat-value" th:text="${zoneCount}">0</div>
+                <div class="stat-label">Active Zones</div>
+            </div>
+            <div class="stat-card red">
+                <div class="stat-value" th:text="${pendingCount + dispatchedCount}">0</div>
+                <div class="stat-label">Total Parcels</div>
+            </div>
+        </div>
+
+        <!-- ADD PARCEL -->
         <div class="card">
-            <h2>Add New Parcel</h2>
+            <h2>➕ Add New Parcel</h2>
             <form action="/add" method="post">
                 <div class="form-group">
-                    <input name="id" placeholder="Parcel ID" required />
-                    <input name="zone" placeholder="Delivery Zone" required />
-                    <input name="weight" type="number" step="0.1" placeholder="Weight (kg)" required />
+                    <input name="id" placeholder="Parcel ID (e.g. PKG-001)" required />
+                    <input name="zone" placeholder="Delivery Zone (e.g. Zone A)" required />
+                    <input name="weight" type="number" step="0.1" min="0.1" placeholder="Weight (kg)" required />
                     <select name="priority">
                         <option value="URGENT">🔴 URGENT</option>
                         <option value="EXPRESS">🟠 EXPRESS</option>
@@ -191,26 +400,95 @@
             </form>
         </div>
 
+        <!-- SORTING OPERATIONS -->
         <div class="card">
-            <h2>Sorting Operations</h2>
-            <form action="/sort" method="post">
-                <button type="submit" class="button-secondary">Sort Next Parcel</button>
-            </form>
+            <h2>⚙️ Sorting Operations</h2>
+            <div class="actions">
+                <form action="/sort" method="post">
+                    <button type="submit" class="button-secondary">Sort Next Parcel</button>
+                </form>
+                <span style="font-size:13px; color:#718096;"
+                    th:text="${pendingCount > 0} ? ${pendingCount} + ' parcel(s) waiting to be sorted' : 'No parcels pending'">
+                    0 parcels waiting
+                </span>
+            </div>
         </div>
 
+        <!-- PENDING PARCELS TABLE -->
         <div class="card">
-            <h2>Dispatch Queues by Zone</h2>
-            <div class="queues-grid">
-                <div th:each="entry : ${queues}" class="zone-card">
-                    <div class="zone-name" th:text="${entry.key}">Zone A</div>
-                    <div class="queue-size" th:text="${entry.value.size()}">0</div>
-                    <div class="queue-label">Parcels in Queue</div>
+            <h2>🕐 Pending Sort Queue</h2>
+            <div th:if="${!#lists.isEmpty(pendingParcels)}">
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Parcel ID</th>
+                                <th>Destination Zone</th>
+                                <th>Weight</th>
+                                <th>Priority</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="p : ${pendingParcels}">
+                                <td><strong th:text="${p.parcelId}">–</strong></td>
+                                <td th:text="${p.destinationZone}">–</td>
+                                <td th:text="${p.weight} + ' kg'">– kg</td>
+                                <td>
+                                    <span th:text="${p.priority}" th:class="${p.priority.name() == 'URGENT'}  ? 'badge badge-urgent'  :
+                                                (${p.priority.name() == 'EXPRESS'} ? 'badge badge-express' :
+                                                 'badge badge-normal')">NORMAL</span>
+                                </td>
+                                <td>
+                                    <span th:text="${p.status}" th:class="${p.status.name() == 'RECEIVED'}   ? 'badge badge-received'   :
+                                                (${p.status.name() == 'SORTED'}    ? 'badge badge-sorted'     :
+                                                 'badge badge-dispatched')">RECEIVED</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <div th:if="${queues.isEmpty()}" style="text-align: center; color: #718096; padding: 40px;">
-                No parcels in dispatch queues yet
+            <div th:if="${#lists.isEmpty(pendingParcels)}" class="empty">
+                <div class="empty-icon">✅</div>
+                Sort queue is empty — all parcels have been processed
             </div>
         </div>
+
+        <!-- DISPATCH QUEUES BY ZONE -->
+        <div class="card">
+            <h2>🚚 Dispatch Queues by Zone</h2>
+            <div class="queues-grid" th:if="${!queues.isEmpty()}">
+                <div th:each="entry : ${queues}" class="zone-card">
+                    <div class="zone-header">
+                        <div>
+                            <div class="zone-name" th:text="'📍 ' + ${entry.key}">Zone A</div>
+                            <div style="font-size:12px; color:#718096; margin-top:3px;">Dispatch Queue</div>
+                        </div>
+                        <div>
+                            <div class="zone-count" th:text="${entry.value.size()}">0</div>
+                            <div style="font-size:11px; color:#a0aec0; text-align:right;">parcels</div>
+                        </div>
+                    </div>
+                    <!-- per-parcel list inside the zone card -->
+                    <div th:each="p : ${entry.value.all}" class="zone-parcel-item">
+                        <div>
+                            <div class="zone-parcel-id" th:text="${p.parcelId}">PKG-001</div>
+                            <div class="zone-parcel-meta" th:text="${p.weight} + ' kg'">1.0 kg</div>
+                        </div>
+                        <span th:text="${p.priority}" th:class="${p.priority.name() == 'URGENT'}  ? 'badge badge-urgent'  :
+                                    (${p.priority.name() == 'EXPRESS'} ? 'badge badge-express' :
+                                     'badge badge-normal')">NORMAL</span>
+                    </div>
+                </div>
+            </div>
+            <div th:if="${queues.isEmpty()}" class="empty">
+                <div class="empty-icon">📭</div>
+                No parcels in dispatch queues yet — add and sort some parcels first
+            </div>
+        </div>
+
     </div>
 </body>
+
 </html>

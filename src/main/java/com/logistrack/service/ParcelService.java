@@ -6,6 +6,7 @@ import com.logistrack.domain.Parcel;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -20,7 +21,8 @@ public class ParcelService {
 
     public void sortNextParcel() {
         Parcel parcel = sorter.next();
-        if (parcel == null) return;
+        if (parcel == null)
+            return;
 
         parcel.markSorted();
 
@@ -32,5 +34,15 @@ public class ParcelService {
 
     public Map<String, DispatchQueue> getAllDispatchQueues() {
         return dispatchQueues;
+    }
+
+    public List<Parcel> getPendingParcels() {
+        return sorter.getPendingParcels();
+    }
+
+    public int getTotalDispatched() {
+        return dispatchQueues.values().stream()
+                .mapToInt(DispatchQueue::size)
+                .sum();
     }
 }
